@@ -12,8 +12,6 @@ import java.util.Queue;
  * Created by Leonid_Shabalkin on 11/10/2016.
  */
 public class ElevatorControlSystem implements ElevatorControlSystemFactory {
-
-    public static final int MAX_ELEVATORS = 16;
     Integer numberOfElevators = 0;
     Integer numberOfFloors = 0;
     ArrayList<Elevator> elevators;
@@ -28,7 +26,7 @@ public class ElevatorControlSystem implements ElevatorControlSystemFactory {
     }
 
     private void initializeElevators() {
-        elevators = new ArrayList<Elevator>();
+        elevators = new ArrayList<>();
         for (int idx = 0; idx < this.numberOfElevators; idx++) {
             elevators.add(new Elevator(1));
         }
@@ -45,7 +43,7 @@ public class ElevatorControlSystem implements ElevatorControlSystemFactory {
 
     @Override
     public void destination(Integer elevatorId, Integer destinationFloor) {
-        elevators.get(elevatorId).addNewDestinatoin(destinationFloor);
+        elevators.get(elevatorId).addNewDestination(destinationFloor);
     }
 
     @Override
@@ -54,7 +52,7 @@ public class ElevatorControlSystem implements ElevatorControlSystemFactory {
             switch (currElevator.status()) {
                 case ELEVATOR_EMPTY:
                     if (!pickupLocations.isEmpty())
-                        currElevator.addNewDestinatoin(pickupLocations.poll());
+                        currElevator.addNewDestination(pickupLocations.poll());
                     break;
                 case ELEVATOR_OCCUPIED:
                     switch (currElevator.direction()) {

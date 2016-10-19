@@ -32,7 +32,7 @@ public class Elevator implements ElevatorFactory {
     }
 
     @Override
-    public void addNewDestinatoin(Integer destination) {
+    public void addNewDestination(Integer destination) {
         this.destinationFloors.add(destination);
     }
 

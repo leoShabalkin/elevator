@@ -1,4 +1,6 @@
 import ecs.impl.Elevator;
+import ecs.impl.enums.ElevatorDirection;
+import ecs.impl.enums.ElevatorStatus;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,18 +17,18 @@ public class ElevatorTest {
     private Elevator elevator;
 
     @Before
-    public void initializeElevator() {
+    public void initializeElevator(){
         elevator = new Elevator(0);
     }
 
     @Test
-    public void testAddingDestination() {
-        elevator.addNewDestinatoin(TENTH_FLOOR);
+    public void testAddingDestination(){
+        elevator.addNewDestination(TENTH_FLOOR);
         assertEquals(TENTH_FLOOR, elevator.nextDestination());
     }
 
     @Test
-    public void checkCurrentFloor() {
+    public void checkCurrentFloor(){
         // Move to floor 2
         elevator.moveUp();
         elevator.moveUp();
@@ -34,9 +36,37 @@ public class ElevatorTest {
     }
 
     @Test
-    public void checkMoveDown() {
+    public void checkMoveDown(){
         elevator.moveDown();
         elevator.moveDown();
         assertEquals(BASEMENT_TWO, elevator.currentFloor());
+    }
+
+    @Test
+    public void checkDirectionUp(){
+        elevator.addNewDestination(SECOND_FLOOR);
+        assertEquals(ElevatorDirection.ELEVATOR_UP, elevator.direction());
+    }
+
+    @Test
+    public void checkDirectionDown(){
+        elevator.addNewDestination(BASEMENT_TWO);
+        assertEquals(ElevatorDirection.ELEVATOR_DOWN, elevator.direction());
+    }
+
+    @Test
+    public void checkDirectionHold(){
+        assertEquals(ElevatorDirection.ELEVATOR_HOLD, elevator.direction());
+    }
+
+    @Test
+    public void checkStatusEmpty(){
+        assertEquals(ElevatorStatus.ELEVATOR_EMPTY, elevator.status());
+    }
+
+    @Test
+    public void checkStatusOccupied(){
+        elevator.addNewDestination(TENTH_FLOOR);
+        assertEquals(ElevatorStatus.ELEVATOR_OCCUPIED, elevator.status());
     }
 }

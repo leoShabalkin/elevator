@@ -4,16 +4,34 @@ import ecs.impl.enums.ElevatorDirection;
 import ecs.impl.enums.ElevatorStatus;
 
 /**
- * Created by Leonid_Shabalkin on 11/10/2016.
+ * Интерфейс управления лифтом
  */
 public interface ElevatorFactory {
+    /**
+     *Переместить вверх
+     */
     void moveUp();
 
+    /**
+     *Перемистить вниз
+     */
     void moveDown();
 
-    void addNewDestinatoin(Integer destination);
+    /**
+     *Задать место назначения
+     * @param destination этаж
+     */
+    void addNewDestination(Integer destination);
 
+    /**
+     * Запрос направления движения
+     * @return {@link ecs.impl.enums.ElevatorDirection}
+     */
     ElevatorDirection direction();
 
+    /**
+     * Запрос состояния занятости лифта
+     * @return {@link ecs.impl.enums.ElevatorStatus}
+     */
     ElevatorStatus status();
 }
