@@ -18,18 +18,6 @@ public interface ElevatorFactory {
     void moveDown();
 
     /**
-     *Задать место назначения
-     * @param destination этаж
-     */
-    void addNewDestination(Integer destination);
-
-    /**
-     * Запрос направления движения
-     * @return {@link ecs.impl.enums.ElevatorDirection}
-     */
-    ElevatorDirection direction();
-
-    /**
      * Запрос состояния занятости лифта
      * @return {@link ecs.impl.enums.ElevatorStatus}
      */

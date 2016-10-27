@@ -2,6 +2,8 @@ package ecs.impl;
 
 import ecs.impl.enums.ElevatorDirection;
 import ecs.impl.enums.ElevatorStatus;
+import ecs.interfaces.Direction;
+import ecs.interfaces.ElevatorControl;
 import ecs.interfaces.ElevatorFactory;
 
 import java.util.LinkedList;
@@ -10,7 +12,7 @@ import java.util.Queue;
 /**
  * Created by Leonid_Shabalkin on 11/10/2016.
  */
-public class Elevator implements ElevatorFactory {
+public class Elevator implements ElevatorFactory, Direction, ElevatorControl {
     private Integer currentFloor;
     private Queue<Integer> destinationFloors;
 
