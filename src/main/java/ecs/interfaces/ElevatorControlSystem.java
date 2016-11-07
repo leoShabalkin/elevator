@@ -3,7 +3,7 @@ package ecs.interfaces;
 /**
  * Интерфейс управления лифтами
  */
-public interface ElevatorControlSystemFactory {
+public interface ElevatorControlSystem {
     int MAX_ELEVATORS = 16;
 
     /**

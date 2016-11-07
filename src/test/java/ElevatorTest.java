@@ -1,4 +1,4 @@
-import ecs.impl.Elevator;
+import ecs.impl.ElevatorImpl;
 import ecs.impl.enums.ElevatorDirection;
 import ecs.impl.enums.ElevatorStatus;
 import org.junit.Before;
@@ -14,11 +14,11 @@ public class ElevatorTest {
     public static final int SECOND_FLOOR = 2;
     public static final int BASEMENT_TWO = -2;
 
-    private Elevator elevator;
+    private ElevatorImpl elevator;
 
     @Before
     public void initializeElevator(){
-        elevator = new Elevator(0);
+        elevator = new ElevatorImpl(0);
     }
 
     @Test

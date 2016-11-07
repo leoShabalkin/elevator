@@ -1,5 +1,5 @@
-import ecs.impl.Elevator;
-import ecs.impl.ElevatorControlSystem;
+import ecs.impl.ElevatorImpl;
+import ecs.impl.ElevatorControlSystemImpl;
 import ecs.impl.exceptions.InvalidNumber;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,13 +17,13 @@ public class ElevatorControlSystemTest {
     public static final int TENTH_FLOOR = 10;
     public static final int FIRST_FLOOR = 1;
     public static final int SEVENTH_FLOOR = 8;
-    private ElevatorControlSystem elevatorControlSystem;
-    private ArrayList<Elevator> elevators;
+    private ElevatorControlSystemImpl elevatorControlSystemImpl;
+    private ArrayList<ElevatorImpl> elevators;
 
     @Before
     public void initialize() {
         try {
-            elevatorControlSystem = new ElevatorControlSystem(2, 20);
+            elevatorControlSystemImpl = new ElevatorControlSystemImpl(2, 20);
         } catch (InvalidNumber invalidNumber) {
             invalidNumber.printStackTrace();
         }
@@ -31,59 +31,59 @@ public class ElevatorControlSystemTest {
 
     @Test
     public void testRequestingOneElevator() {
-        elevatorControlSystem.pickUp(TENTH_FLOOR);
+        elevatorControlSystemImpl.pickUp(TENTH_FLOOR);
         for (int i = 0; i < TENTH_FLOOR; i++) {
-            elevatorControlSystem.step();
+            elevatorControlSystemImpl.step();
         }
-        elevators = elevatorControlSystem.getElevators();
+        elevators = elevatorControlSystemImpl.getElevators();
         assertEquals(TENTH_FLOOR, elevators.get(ELEVATOR_ID_ZERO).currentFloor());
     }
 
     @Test
     public void testElevatorTwoNotMoving() {
-        elevatorControlSystem.pickUp(TENTH_FLOOR);
+        elevatorControlSystemImpl.pickUp(TENTH_FLOOR);
         for (int i = 0; i < TENTH_FLOOR; i++) {
-            elevatorControlSystem.step();
+            elevatorControlSystemImpl.step();
         }
-        elevators = elevatorControlSystem.getElevators();
+        elevators = elevatorControlSystemImpl.getElevators();
         assertEquals(FIRST_FLOOR, elevators.get(ELEVATOR_ID_ONE).currentFloor());
     }
 
     @Test
     public void testCallingTwoElevators() {
-        elevatorControlSystem.pickUp(TENTH_FLOOR);
-        elevatorControlSystem.pickUp(SEVENTH_FLOOR);
+        elevatorControlSystemImpl.pickUp(TENTH_FLOOR);
+        elevatorControlSystemImpl.pickUp(SEVENTH_FLOOR);
         for (int i = 0; i < TENTH_FLOOR; i++) {
-            elevatorControlSystem.step();
+            elevatorControlSystemImpl.step();
         }
-        elevators = elevatorControlSystem.getElevators();
+        elevators = elevatorControlSystemImpl.getElevators();
         assertEquals(TENTH_FLOOR, elevators.get(ELEVATOR_ID_ZERO).currentFloor());
         assertEquals(SEVENTH_FLOOR, elevators.get(ELEVATOR_ID_ONE).currentFloor());
     }
 
     @Test
     public void testSendingElevatorToDestination() {
-        elevatorControlSystem.destination(ELEVATOR_ID_ZERO, TENTH_FLOOR);
+        elevatorControlSystemImpl.destination(ELEVATOR_ID_ZERO, TENTH_FLOOR);
         for (int idx = 0; idx < TENTH_FLOOR; idx++) {
-            elevatorControlSystem.step();
+            elevatorControlSystemImpl.step();
         }
-        elevators = elevatorControlSystem.getElevators();
+        elevators = elevatorControlSystemImpl.getElevators();
         assertEquals(TENTH_FLOOR, elevators.get(ELEVATOR_ID_ZERO).currentFloor());
     }
 
     @Test
     public void testSendingElevatorToMultipleDestinations() {
-        elevatorControlSystem.destination(ELEVATOR_ID_ZERO, TENTH_FLOOR);
-        elevatorControlSystem.destination(ELEVATOR_ID_ZERO, SEVENTH_FLOOR);
+        elevatorControlSystemImpl.destination(ELEVATOR_ID_ZERO, TENTH_FLOOR);
+        elevatorControlSystemImpl.destination(ELEVATOR_ID_ZERO, SEVENTH_FLOOR);
         for (int idx = 0; idx < TENTH_FLOOR; idx++) {
-            elevatorControlSystem.step();
+            elevatorControlSystemImpl.step();
         }
-        elevators = elevatorControlSystem.getElevators();
+        elevators = elevatorControlSystemImpl.getElevators();
         assertEquals(TENTH_FLOOR, elevators.get(ELEVATOR_ID_ZERO).currentFloor());
         for (int idx = 0; idx < TENTH_FLOOR - SEVENTH_FLOOR; idx++) {
-            elevatorControlSystem.step();
+            elevatorControlSystemImpl.step();
         }
-        elevators = elevatorControlSystem.getElevators();
+        elevators = elevatorControlSystemImpl.getElevators();
         assertEquals(SEVENTH_FLOOR, elevators.get(ELEVATOR_ID_ZERO).currentFloor());
     }
 

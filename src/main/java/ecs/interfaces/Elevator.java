@@ -1,12 +1,11 @@
 package ecs.interfaces;
 
-import ecs.impl.enums.ElevatorDirection;
 import ecs.impl.enums.ElevatorStatus;
 
 /**
  * Интерфейс управления лифтом
  */
-public interface ElevatorFactory {
+public interface Elevator {
     /**
      *Переместить вверх
      */

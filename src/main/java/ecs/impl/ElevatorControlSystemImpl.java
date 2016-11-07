@@ -2,37 +2,37 @@ package ecs.impl;
 
 import ecs.impl.enums.ElevatorDirection;
 import ecs.impl.exceptions.InvalidNumber;
-import ecs.interfaces.ElevatorControlSystemFactory;
+import ecs.interfaces.ElevatorControlSystem;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Queue;
 
 /**
  * Created by Leonid_Shabalkin on 11/10/2016.
  */
-public class ElevatorControlSystem implements ElevatorControlSystemFactory {
+public class ElevatorControlSystemImpl implements ElevatorControlSystem {
     Integer numberOfElevators = 0;
     Integer numberOfFloors = 0;
-    ArrayList<Elevator> elevators;
+    ArrayList<ElevatorImpl> elevators;
     Queue<Integer> pickupLocations;
 
-    public ElevatorControlSystem(Integer numberOfElevators, Integer numberOfFloors) throws InvalidNumber {
-        if (numberOfElevators < 0) throw new InvalidNumber("Elevator number must be positive");
+    public ElevatorControlSystemImpl(Integer numberOfElevators, Integer numberOfFloors) throws InvalidNumber {
+        if (numberOfElevators < 0) throw new InvalidNumber("ElevatorImpl number must be positive");
         this.numberOfElevators = (numberOfElevators > MAX_ELEVATORS) ? MAX_ELEVATORS : numberOfElevators;
         this.numberOfFloors = numberOfFloors;
         initializeElevators();
-        pickupLocations = new LinkedList<>();
+        pickupLocations = new ArrayDeque<>();
     }
 
     private void initializeElevators() {
         elevators = new ArrayList<>();
         for (int idx = 0; idx < this.numberOfElevators; idx++) {
-            elevators.add(new Elevator(1));
+            elevators.add(new ElevatorImpl(1));
         }
     }
 
-    public ArrayList<Elevator> getElevators() {
+    public ArrayList<ElevatorImpl> getElevators() {
         return elevators;
     }
 
@@ -48,7 +48,7 @@ public class ElevatorControlSystem implements ElevatorControlSystemFactory {
 
     @Override
     public void step() {
-        for (Elevator currElevator : elevators) {
+        for (ElevatorImpl currElevator : elevators) {
             switch (currElevator.status()) {
                 case ELEVATOR_EMPTY:
                     if (!pickupLocations.isEmpty())
