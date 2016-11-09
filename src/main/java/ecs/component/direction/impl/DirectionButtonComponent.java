@@ -1,5 +1,6 @@
-package ecs.component.direction;
+package ecs.component.direction.impl;
 
+import ecs.component.direction.DirectionComponent;
 import ecs.impl.enums.ElevatorDirection;
 
 /**

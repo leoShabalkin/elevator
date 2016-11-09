@@ -1,4 +1,6 @@
-package ecs.component.system;
+package ecs.component.system.impl;
+
+import ecs.component.system.LiftingSystem;
 
 /**
  * Created by Leonid_Shabalkin on 7/11/2016.

@@ -1,6 +1,7 @@
-package ecs.component.panel;
+package ecs.component.panel.impl;
 
 import ecs.component.elevator.ElevatorSystem;
+import ecs.component.panel.ControlPanel;
 import ecs.interfaces.ElevatorControlSystem;
 
 import java.util.ArrayList;
