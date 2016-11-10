@@ -1,37 +1,27 @@
 package ecs.component.direction.impl;
 
+import com.google.common.collect.ImmutableMap;
 import ecs.component.direction.DirectionComponent;
 import ecs.impl.enums.ElevatorDirection;
+
+import java.util.Map;
 
 /**
  * Created by Leonid_Shabalkin on 3/11/2016.
  */
 public class DirectionButtonComponent implements DirectionComponent {
+    private static final Map<ElevatorDirection, String> defaultAnswer = ImmutableMap.<ElevatorDirection, String>builder()
+            .put(ElevatorDirection.ELEVATOR_UP, "Show elevator up")
+            .put(ElevatorDirection.ELEVATOR_DOWN, "Show elevator down")
+            .put(ElevatorDirection.ELEVATOR_HOLD, "Show elevator stop")
+            .build();
 
-    public void showUp(ElevatorDirection elevatorDirection) {
-        if (elevatorDirection == ElevatorDirection.ELEVATOR_UP) {
-            System.out.println("Show elevator up");
-        }
+    private void showMessage(ElevatorDirection elevatorDirection) {
+        System.out.println(defaultAnswer.get(elevatorDirection));
     }
-
-    public void showDown(ElevatorDirection elevatorDirection) {
-        //Если делать полную симуляцию, то в данном случаи необходим блок else в котором гаситься лампочка
-        if (elevatorDirection == ElevatorDirection.ELEVATOR_DOWN) {
-            System.out.println("Show elevator down");
-        }
-    }
-
-    public void showStop(ElevatorDirection elevatorDirection) {
-        if (elevatorDirection == ElevatorDirection.ELEVATOR_HOLD) {
-            System.out.println("Show elevator stop");
-        }
-    }
-
 
     @Override
     public synchronized void showInformation(ElevatorDirection elevatorDirection) {
-        showDown(elevatorDirection);
-        showUp(elevatorDirection);
-        showStop(elevatorDirection);
+        showMessage(elevatorDirection);
     }
 }
