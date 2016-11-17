@@ -2,7 +2,8 @@ package ecs.component.panel.impl;
 
 import ecs.component.elevator.ElevatorSystem;
 import ecs.component.panel.ControlPanel;
-import ecs.interfaces.ElevatorControlSystem;
+import ecs.control.ElevatorController;
+import ecs.control.ElevatorRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,16 +13,17 @@ import java.util.List;
  */
 public class ControlPanelComponent implements ControlPanel {
     List<Integer> panel = new ArrayList<>();
-    private ElevatorControlSystem controlSystem;
     private ElevatorSystem elevator;
+    private ElevatorController controller;
 
-    public ControlPanelComponent(ElevatorControlSystem controlSystem, ElevatorSystem elevator) {
-        this.controlSystem = controlSystem;
+    public ControlPanelComponent(ElevatorController controlSystem, ElevatorSystem elevator) {
+        this.controller = controlSystem;
         this.elevator = elevator;
     }
 
     @Override
     public void action(int numberFloat) {
-        controlSystem.destination(elevator.elevatorId(), numberFloat);
+        ElevatorRequest request = new ElevatorRequest(numberFloat);
+        controller.dispatchElevator(elevator, request);
     }
 }

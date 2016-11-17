@@ -1,24 +1,31 @@
 package ecs.component.system.impl;
 
 import ecs.component.system.LiftingSystem;
+import ecs.interfaces.Elevator;
 
 /**
  * Created by Leonid_Shabalkin on 7/11/2016.
  */
 public class LiftingSystemImpl implements LiftingSystem {
+    private Elevator elevator;
+
+    public LiftingSystemImpl(Elevator elevator) {
+        this.elevator = elevator;
+    }
+
     @Override
     public void stop() {
-        System.out.print("Stop elevator");
+        elevator.stop();
     }
 
     @Override
     public void moveDown() {
-        System.out.print("Move down elevator");
+        elevator.moveDown();
     }
 
     @Override
     public void moveUp() {
-        System.out.print("Move up elevator");
+        elevator.moveUp();
     }
 
 }

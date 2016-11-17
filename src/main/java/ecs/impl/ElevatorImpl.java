@@ -15,10 +15,16 @@ import java.util.Queue;
 public class ElevatorImpl implements Elevator, Direction, ElevatorControl {
     private Integer currentFloor;
     private Queue<Integer> destinationFloors;
+    private Integer id;
 
     public ElevatorImpl(Integer currentFloor) {
         this.currentFloor = currentFloor;
         this.destinationFloors = new LinkedList<>();
+    }
+
+    public ElevatorImpl(Integer currentFloor, Integer id) {
+        this.currentFloor = currentFloor;
+        this.id = id;
     }
 
     public int nextDestination() {
@@ -49,6 +55,11 @@ public class ElevatorImpl implements Elevator, Direction, ElevatorControl {
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public ElevatorDirection direction() {
         if (destinationFloors.size() > 0) {
             if (currentFloor < destinationFloors.peek()) {
@@ -63,5 +74,10 @@ public class ElevatorImpl implements Elevator, Direction, ElevatorControl {
     @Override
     public ElevatorStatus status() {
         return (destinationFloors.size() > 0) ? ElevatorStatus.ELEVATOR_OCCUPIED : ElevatorStatus.ELEVATOR_EMPTY;
+    }
+
+    @Override
+    public Integer elevatorId() {
+        return id;
     }
 }

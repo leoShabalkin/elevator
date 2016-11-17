@@ -28,7 +28,7 @@ public class ElevatorControlSystemImpl implements ElevatorControlSystem {
     private void initializeElevators() {
         elevators = new ArrayList<>();
         for (int idx = 0; idx < this.numberOfElevators; idx++) {
-            elevators.add(new ElevatorImpl(1));
+            elevators.add(new ElevatorImpl(1, idx));
         }
     }
 

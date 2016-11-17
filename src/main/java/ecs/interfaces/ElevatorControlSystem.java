@@ -1,5 +1,9 @@
 package ecs.interfaces;
 
+import ecs.impl.ElevatorImpl;
+
+import java.util.ArrayList;
+
 /**
  * Интерфейс управления лифтами
  */
@@ -23,4 +27,6 @@ public interface ElevatorControlSystem {
      * Сделать шаг, переместиться на этаж ниже/выше
      */
     void step();
+
+    ArrayList<ElevatorImpl> getElevators();
 }
