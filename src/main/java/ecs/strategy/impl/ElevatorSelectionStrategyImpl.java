@@ -14,10 +14,6 @@ import java.util.Optional;
 public class ElevatorSelectionStrategyImpl implements ElevatorSelectionStrategy {
     @Override
     public Elevator selectElevator(List<ElevatorImpl> elevators, ElevatorRequest call) {
-       Optional<ElevatorImpl> elevatorOptional= elevators.stream().findFirst();
-        if (elevatorOptional.isPresent()) {
-            return elevatorOptional.get();
-        }
-        return null;
+        return elevators.stream().findFirst().orElse(null);
     }
 }
