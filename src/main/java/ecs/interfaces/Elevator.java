@@ -18,6 +18,11 @@ public interface Elevator extends ElevatorSystem {
     void moveDown();
 
     /**
+     * Остановить
+     */
+    void stop();
+
+    /**
      * Запрос состояния занятости лифта
      * @return {@link ecs.impl.enums.ElevatorStatus}
      */
